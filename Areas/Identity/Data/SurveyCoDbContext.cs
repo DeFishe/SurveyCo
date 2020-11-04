@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SurveyCo.Areas.Identity.Data;
+using SurveyCo.Models;
 
 namespace SurveyCo.Data
 {
@@ -15,6 +16,11 @@ namespace SurveyCo.Data
             : base(options)
         {
         }
+
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Questionnaire> Questionnaires { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

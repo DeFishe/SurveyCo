@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurveyCo.Data;
 
 namespace SurveyCo.Migrations
 {
     [DbContext(typeof(SurveyCoDbContext))]
-    partial class SurveyCoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201104190909_CompaniesTable")]
+    partial class CompaniesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,36 +221,12 @@ namespace SurveyCo.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SurveyCo.Models.Answer", b =>
-                {
-                    b.Property<int>("AnswerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnswerText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnswerID");
-
-                    b.HasIndex("QuestionID");
-
-                    b.ToTable("Answers");
-                });
-
             modelBuilder.Entity("SurveyCo.Models.Company", b =>
                 {
                     b.Property<int>("CompanyID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -257,44 +235,6 @@ namespace SurveyCo.Migrations
                     b.HasKey("CompanyID");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("SurveyCo.Models.Question", b =>
-                {
-                    b.Property<int>("QuestionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionnaireID")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionID");
-
-                    b.HasIndex("QuestionnaireID");
-
-                    b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("SurveyCo.Models.Questionnaire", b =>
-                {
-                    b.Property<int>("QuestionnaireID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionnaireID");
-
-                    b.HasIndex("CompanyID");
-
-                    b.ToTable("Questionnaires");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -344,33 +284,6 @@ namespace SurveyCo.Migrations
                     b.HasOne("SurveyCo.Areas.Identity.Data.SurveyCoUserModel", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SurveyCo.Models.Answer", b =>
-                {
-                    b.HasOne("SurveyCo.Models.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SurveyCo.Models.Question", b =>
-                {
-                    b.HasOne("SurveyCo.Models.Questionnaire", "Questionnaire")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuestionnaireID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SurveyCo.Models.Questionnaire", b =>
-                {
-                    b.HasOne("SurveyCo.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
