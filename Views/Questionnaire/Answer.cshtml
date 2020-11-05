@@ -1,9 +1,25 @@
-﻿
+﻿@model QuestionnaireViewModel
 @{
     ViewData["Title"] = "Answer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Answer</h1>
-<p>COMING SOON</p>
+<h1>Sample Survey</h1>
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Answer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.Questions[i].QuestionText</label>
+                    <input asp-for="@Model.Answers[i].AnswerText" class="form-control" />
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Answer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 

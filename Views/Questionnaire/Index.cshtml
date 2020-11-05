@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Sample Survey Overview</h1>
 
 @if (Model.Count > 0)
 {
-    <table class="table-bordered">
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -28,7 +28,7 @@
             }
         </tbody>
     </table>
-    <a asp-action="Answer"><button type="button" class="btn-dark">Begin Survey</button></a>
+    <a asp-action="Answer"><button type="button" class="btn btn-primary">Begin Survey</button></a>
 }
 else
 {
