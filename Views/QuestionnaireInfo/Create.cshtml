@@ -1,0 +1,29 @@
+﻿@model CreateQuestionnaireViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Questions</h1>
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Company ID</label>
+                <input asp-for="@Model.CompanyID" class="form-control"/>
+            </div>
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="form-group">
+                    <label class="control-label">Question @(i+1):</label>
+                    <input asp-for="@Model.Questions[i].QuestionText" class="form-control" />
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Answer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
